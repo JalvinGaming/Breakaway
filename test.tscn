@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://i62pwwyexymk"]
+
+[ext_resource type="PackedScene" uid="uid://h4mr0xx4vowo" path="res://Player.tscn" id="1_0rgic"]
+[ext_resource type="Script" path="res://camera.gd" id="2_wkq18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0osgr"]
+
+[sub_resource type="Sky" id="Sky_h8hgw"]
+sky_material = SubResource("ProceduralSkyMaterial_0osgr")
+
+[sub_resource type="Environment" id="Environment_48n5t"]
+background_mode = 2
+sky = SubResource("Sky_h8hgw")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_48n5t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.374607, -0.49681, 0.782847, 0, 0.844328, 0.535827, -0.927184, -0.200724, 0.316291, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+snap = 0.1
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, 0)
+size = Vector3(6.5, 1, 7)
+
+[node name="Player" parent="." instance=ExtResource("1_0rgic")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+script = ExtResource("2_wkq18")
